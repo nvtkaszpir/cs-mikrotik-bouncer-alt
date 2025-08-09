@@ -1,0 +1,1686 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://nvtkaszpir.github.io/cs-mikrotik-bouncer-alt/config.bouncer/">
+      
+      
+        <link rel="prev" href="../config.mikrotik/">
+      
+      
+        <link rel="next" href="../deploy/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
+    
+    
+      
+        <title>Bouncer config - cs-mikrotik-bouncer-alt</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.d7758b05.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-M6QCR53644"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-M6QCR53644",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-M6QCR53644",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prepare-config-for-the-app" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="cs-mikrotik-bouncer-alt" class="md-header__button md-logo" aria-label="cs-mikrotik-bouncer-alt" data-md-component="logo">
+      
+  <img src="../static/mikrotik_plus_crowdsec_small_800.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            cs-mikrotik-bouncer-alt
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bouncer config
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nvtkaszpir/cs-mikrotik-bouncer-alt" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="cs-mikrotik-bouncer-alt" class="md-nav__button md-logo" aria-label="cs-mikrotik-bouncer-alt" data-md-component="logo">
+      
+  <img src="../static/mikrotik_plus_crowdsec_small_800.png" alt="logo">
+
+    </a>
+    cs-mikrotik-bouncer-alt
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nvtkaszpir/cs-mikrotik-bouncer-alt" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General Info
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            General Info
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../known.limitations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Known Limitations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../comparison/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Comparison
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../todo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    To Do
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Configuration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config.mikrotik/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mikrotik config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Bouncer config
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Bouncer config
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#register-bouncer-in-crowdsec-lapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register bouncer in Crowdsec LAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-firewall-rules-to-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set firewall rules to control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration options
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crowdsec_bouncer_api_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      CROWDSEC_BOUNCER_API_KEY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crowdsec_url" class="md-nav__link">
+    <span class="md-ellipsis">
+      CROWDSEC_URL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crowdsec_origins" class="md-nav__link">
+    <span class="md-ellipsis">
+      CROWDSEC_ORIGINS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug_decisions_max" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEBUG_DECISIONS_MAX
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log_level" class="md-nav__link">
+    <span class="md-ellipsis">
+      LOG_LEVEL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log_format_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      LOG_FORMAT_JSON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_host" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_HOST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_user" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_USER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_PASS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_TLS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_ipv4" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_IPV4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_IPV6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_firewall_filter_enable" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_FIREWALL_FILTER_ENABLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_filter_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_FILTER_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_filter_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_FILTER_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_filter_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_FILTER_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_filter_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_FILTER_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_firewall_raw_enable" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_FIREWALL_RAW_ENABLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_raw_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_RAW_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_raw_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_RAW_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_raw_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_RAW_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_raw_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_RAW_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_address_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_ADDRESS_LIST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_TIMEOUT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_update_frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_UPDATE_FREQUENCY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use_max_ttl" class="md-nav__link">
+    <span class="md-ellipsis">
+      USE_MAX_TTL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default_ttl_max" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEFAULT_TTL_MAX
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger_on_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRIGGER_ON_UPDATE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ticker_interval" class="md-nav__link">
+    <span class="md-ellipsis">
+      TICKER_INTERVAL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gomaxprocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      GOMAXPROCS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics_address" class="md-nav__link">
+    <span class="md-ellipsis">
+      METRICS_ADDRESS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tz" class="md-nav__link">
+    <span class="md-ellipsis">
+      TZ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Deployment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tuning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tuning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#register-bouncer-in-crowdsec-lapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register bouncer in Crowdsec LAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-firewall-rules-to-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set firewall rules to control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration options
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crowdsec_bouncer_api_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      CROWDSEC_BOUNCER_API_KEY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crowdsec_url" class="md-nav__link">
+    <span class="md-ellipsis">
+      CROWDSEC_URL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crowdsec_origins" class="md-nav__link">
+    <span class="md-ellipsis">
+      CROWDSEC_ORIGINS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug_decisions_max" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEBUG_DECISIONS_MAX
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log_level" class="md-nav__link">
+    <span class="md-ellipsis">
+      LOG_LEVEL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log_format_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      LOG_FORMAT_JSON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_host" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_HOST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_user" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_USER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_PASS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_TLS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_ipv4" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_IPV4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_IPV6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_firewall_filter_enable" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_FIREWALL_FILTER_ENABLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_filter_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_FILTER_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_filter_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_FILTER_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_filter_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_FILTER_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_filter_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_FILTER_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_firewall_raw_enable" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_FIREWALL_RAW_ENABLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_raw_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_RAW_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip_firewall_raw_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP_FIREWALL_RAW_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_raw_rules_src" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_RAW_RULES_SRC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6_firewall_raw_rules_dst" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPV6_FIREWALL_RAW_RULES_DST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_address_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_ADDRESS_LIST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_TIMEOUT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik_update_frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      MIKROTIK_UPDATE_FREQUENCY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use_max_ttl" class="md-nav__link">
+    <span class="md-ellipsis">
+      USE_MAX_TTL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default_ttl_max" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEFAULT_TTL_MAX
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger_on_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRIGGER_ON_UPDATE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ticker_interval" class="md-nav__link">
+    <span class="md-ellipsis">
+      TICKER_INTERVAL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gomaxprocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      GOMAXPROCS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics_address" class="md-nav__link">
+    <span class="md-ellipsis">
+      METRICS_ADDRESS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tz" class="md-nav__link">
+    <span class="md-ellipsis">
+      TZ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="prepare-config-for-the-app">Prepare config for the app</h1>
+<p>Copy <code>env.dist</code> as <code>.env</code> and edit its content environmental variables.</p>
+<h2 id="register-bouncer-in-crowdsec-lapi">Register bouncer in Crowdsec LAPI</h2>
+<p>Generate a bouncer API key following <a href="https://doc.crowdsec.net/docs/cscli/cscli_bouncers_add">CrowdSec documentation</a>,
+get a bouncer API key from your CrowdSec with a command</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cscli<span class="w"> </span>bouncers<span class="w"> </span>add<span class="w"> </span>mikrotik-bouncer
+</span></code></pre></div>
+<p>Copy the API key printed. You <strong>WILL NOT</strong> be able the get it again.
+Paste this API key as the value for bouncer environment variable <code>CROWDSEC_BOUNCER_API_KEY</code></p>
+<h2 id="set-firewall-rules-to-control">Set firewall rules to control</h2>
+<p>In previous steps you can get the required firewall rules which will be used to
+be updated.</p>
+<p>Adjust other variables in .env file as needed, especially host to MikroTik
+device and CrowdSec endpoint. See section below.</p>
+<h2 id="configuration-options">Configuration options</h2>
+<p>The bouncer configuration is made via environment variables.</p>
+<p>TODO: use golang docstring generator to list env vars and settings</p>
+<h3 id="crowdsec_bouncer_api_key">CROWDSEC_BOUNCER_API_KEY</h3>
+<p><code>CROWDSEC_BOUNCER_API_KEY</code> - default value: unset, required,
+CrowdSec bouncer API key required to be authorized to request local API.</p>
+<h3 id="crowdsec_url">CROWDSEC_URL</h3>
+<p><code>CROWDSEC_URL</code> - default value: <code>http://crowdsec:8080/</code>, required,
+Host and port of CrowdSec LAPI agent.</p>
+<h3 id="crowdsec_origins">CROWDSEC_ORIGINS</h3>
+<p><code>CROWDSEC_ORIGINS</code> - default value: unset, optional,
+Space separated list of CrowdSec origins to filter from LAPI,
+in example <code>crowdsec cscli</code>.</p>
+<h3 id="debug_decisions_max">DEBUG_DECISIONS_MAX</h3>
+<p><code>DEBUG_DECISIONS_MAX</code> - default value: <code>-1</code>, optional,
+Set number of decisions to process at max, useful for debugging.
+Set to 3 to make things less spammy.</p>
+<h3 id="log_level">LOG_LEVEL</h3>
+<p><code>LOG_LEVEL</code> - default value: <code>1</code>, optional,
+Minimum log level for bouncer in <a href="https://pkg.go.dev/github.com/rs/zerolog#readme-leveled-logging">zerolog levels</a></p>
+<h3 id="log_format_json">LOG_FORMAT_JSON</h3>
+<p><code>LOG_FORMAT_JSON</code> - default value: <code>true</code>, optional,
+Use logs in JSON format, set to <code>false</code> for plain text zerolog format
+with key=value, useful only in certain debug sessions</p>
+<h3 id="mikrotik_host">MIKROTIK_HOST</h3>
+<p><code>MIKROTIK_HOST</code> - default value: unset, required,
+MikroTik device address to access RouterOS API ( <code>ip:port</code>)</p>
+<h3 id="mikrotik_user">MIKROTIK_USER</h3>
+<p><code>MIKROTIK_USER</code> - default value: unset, required,
+Mikrotik device username to access RouterOS API</p>
+<h3 id="mikrotik_pass">MIKROTIK_PASS</h3>
+<p><code>MIKROTIK_PASS</code> - default value: unset, required,
+Mikrotik device password to access RouterOS API</p>
+<h3 id="mikrotik_tls">MIKROTIK_TLS</h3>
+<p><code>MIKROTIK_TLS</code> -  default value: <code>true</code>, optional,
+User TLS to connect to MikroTik API,</p>
+<h3 id="mikrotik_ipv4">MIKROTIK_IPV4</h3>
+<p><code>MIKROTIK_IPV4</code> - default value: <code>true</code>, optional,
+IPv4 support, set to <code>true</code> to enable processing IPv4 blocklists</p>
+<h3 id="mikrotik_ipv6">MIKROTIK_IPV6</h3>
+<p><code>MIKROTIK_IPV6</code> - default value: <code>true</code>,  optional,
+IPv6 support, set to <code>true</code> to enable processing IPv6 blocklists</p>
+<h3 id="mikrotik_firewall_filter_enable">MIKROTIK_FIREWALL_FILTER_ENABLE</h3>
+<p><code>MIKROTIK_FIREWALL_FILTER_ENABLE</code> - default value: <code>true</code>, optional,
+enable updating firewall filter rules (filter input, forward, output)
+See <a href="../config.mikrotik/#firewall---filter-or-raw">Firewall Filter or Raw</a> for more details.</p>
+<h3 id="ip_firewall_filter_rules_src">IP_FIREWALL_FILTER_RULES_SRC</h3>
+<p><code>IP_FIREWALL_FILTER_RULES_SRC</code> - default value: unset, required if <code>MIKROTIK_IPV4</code> is set to true,
+comma separated numbers of IPv4 firewall filter rules to update on access-list change,
+and to set src-address-list in it,
+those are created during configuration, for example <code>1,2</code> (filter input, forward, output)</p>
+<h3 id="ip_firewall_filter_rules_dst">IP_FIREWALL_FILTER_RULES_DST</h3>
+<p><code>IP_FIREWALL_FILTER_RULES_DST</code> - default value: unset, required if <code>MIKROTIK_IPV4</code> is set to true,
+comma separated numbers of IPv4 firewall filter rules to update on access-list change,
+and to set dst-address-list in it,
+those are created during configuration, for example <code>3,4</code> (filter input, forward, output)</p>
+<h3 id="ipv6_firewall_filter_rules_src">IPV6_FIREWALL_FILTER_RULES_SRC</h3>
+<p><code>IPV6_FIREWALL_FILTER_RULES_SRC</code> - default value: unset, required if <code>MIKROTIK_IPV6</code> is set to true,
+comma separated numbers of IPv6 firewall filter rules to update on access-list change,
+and to set src-address-list in it,
+those are created during configuration , for example <code>0,1</code> (filter input, forward, output)</p>
+<h3 id="ipv6_firewall_filter_rules_dst">IPV6_FIREWALL_FILTER_RULES_DST</h3>
+<p><code>IPV6_FIREWALL_FILTER_RULES_DST</code> - default value: unset, required if <code>MIKROTIK_IPV6</code> is set to true,
+comma separated numbers of IPv6 firewall filter rules to update on access-list change,
+and to set dst-address-list in it,
+those are created during configuration , for example <code>2,3</code> (filter input, forward, output)</p>
+<h3 id="mikrotik_firewall_raw_enable">MIKROTIK_FIREWALL_RAW_ENABLE</h3>
+<p><code>MIKROTIK_FIREWALL_RAW_ENABLE</code> - default value: <code>true</code>, optional,
+enable updating firewall raw rules (raw prerouting, output).
+See <a href="../config.mikrotik/#firewall---filter-or-raw">Firewall Filter or Raw</a> for more details.</p>
+<h3 id="ip_firewall_raw_rules_src">IP_FIREWALL_RAW_RULES_SRC</h3>
+<p><code>IP_FIREWALL_RAW_RULES_SRC</code> - default value: unset, required if <code>MIKROTIK_IPV4</code> is set to true,
+comma separated numbers of IPv4 firewall raw rules to update on access-list change,
+and to set src-address-list in it,
+those are created during configuration, for example <code>1</code> (raw prerouting, output)</p>
+<h3 id="ip_firewall_raw_rules_dst">IP_FIREWALL_RAW_RULES_DST</h3>
+<p><code>IP_FIREWALL_RAW_RULES_DST</code> - default value: unset, required if <code>MIKROTIK_IPV4</code> is set to true,
+comma separated numbers of IPv4 firewall raw rules to update on access-list change,
+and to set dst-address-list in it,
+those are created during configuration, for example <code>2</code> (raw prerouting, output)</p>
+<h3 id="ipv6_firewall_raw_rules_src">IPV6_FIREWALL_RAW_RULES_SRC</h3>
+<p><code>IPV6_FIREWALL_RAW_RULES_SRC</code> - default value: unset, required if <code>MIKROTIK_IPV6</code> is set to true,
+comma separated numbers of IPv6 firewall raw rules to update on access-list change,
+and to set src-address-list in it,
+those are created during configuration , for example <code>0</code> (raw prerouting, output)</p>
+<h3 id="ipv6_firewall_raw_rules_dst">IPV6_FIREWALL_RAW_RULES_DST</h3>
+<p><code>IPV6_FIREWALL_RAW_RULES_DST</code> - default value: unset, required if <code>MIKROTIK_IPV6</code> is set to true,
+comma separated numbers of IPv6 firewall raw rules to update on access-list change,
+and to set dst-address-list in it,
+those are created during configuration , for example <code>1</code> (raw prerouting, output)</p>
+<h3 id="mikrotik_address_list">MIKROTIK_ADDRESS_LIST</h3>
+<p><code>MIKROTIK_ADDRESS_LIST</code> - default value: <code>crowdsec</code>, optional,
+prefix for target address-list in MikroTik device, no special chars,
+no spaces etc, generated name will be with a timestamp suffix,
+if you set it to <code>crowdsec</code> then access-list will be named as
+<code>crowdsec_2025-05-19_15-01-09</code> or something like it (local time),</p>
+<h3 id="mikrotik_timeout">MIKROTIK_TIMEOUT</h3>
+<p><code>MIKROTIK_TIMEOUT</code> - default value: <code>10s</code>, optional,
+set timeout when trying to connect to the MikroTik,
+recommended to keep it under <code>60s</code></p>
+<h3 id="mikrotik_update_frequency">MIKROTIK_UPDATE_FREQUENCY</h3>
+<p><code>MIKROTIK_UPDATE_FREQUENCY</code> - default value: <code>1h</code>, optional,
+Set default frequency to update MikroTik address-lists and firewall rules.
+This is useful if you have very low <a href="#default_ttl_max">DEFAULT_TTL_MAX</a> value.</p>
+<p>This is useful if you have disabled <a href="#trigger_on_update">TRIGGER_ON_UPDATE</a>,
+or enabled <code>USE_MAX_TTL=true</code> and set <a href="#default_ttl_max">DEFAULT_TTL_MAX</a>.</p>
+<h3 id="use_max_ttl">USE_MAX_TTL</h3>
+<p><code>USE_MAX_TTL</code> - default value: <code>false</code>, optional,
+Set to <code>true</code> if you want to truncate timeout for the address in address-list
+so that your address lists expire faster</p>
+<h3 id="default_ttl_max">DEFAULT_TTL_MAX</h3>
+<p><code>DEFAULT_TTL_MAX</code> - default value: <code>4h</code>, optional,
+If <a href="#use_max_ttl">USE_MAX_TTL</a> is <code>true</code>  and new address timeout is above
+<a href="#default_ttl_max">DEFAULT_TTL_MAX</a> then that address will have timeout
+set to <a href="#use_max_ttl">USE_MAX_TTL</a> value.</p>
+<p>For example new decision comes in, and address should be banned for 4 days,
+but <code>DEFAULT_TTL_MAX=4h</code> will make it to be added with <code>timeout=4h</code>.
+Notice that the original 4 day ban will be respected in the application cache
+or from incoming CrowdSec decisions, but on MikroTik it will have 4h.</p>
+<p>Yet it is good to quickly expire old address-lists automatically, because
+new ones will come in with refreshed entries for the same address IPs to block.</p>
+<p>Because CrowdSec publishes new lists at least once an hour then that address
+will be readded to the new list every hour until expires.</p>
+<p>This helps to avoid having thousands addresses in hundreds address-lists in
+the MikroTik.</p>
+<p>Recommended value is at least 2x longer than the frequency you get updates from
+the CrowdSec, so on basic setup 4h should be sufficient. For locations with
+possible network disruptions 8h or 16 would be recommended
+(but then why ban if there is no internet? :) ).</p>
+<p>For weaker/older devices it may be better to keep it really low like 2h.</p>
+<p>If you get frequent updates from your CrowdSec LAPI (say every 5 minutes),
+and you have <a href="#trigger_on_update">TRIGGER_ON_UPDATE=true</a>, then
+you could even set it to as low as 15min.</p>
+<p>Must be longer than <a href="#mikrotik_update_frequency">MIKROTIK_UPDATE_FREQUENCY</a>.</p>
+<h3 id="trigger_on_update">TRIGGER_ON_UPDATE</h3>
+<p><code>TRIGGER_ON_UPDATE</code> - default value: <code>true</code>, optional,
+if you set it to true, then trigger MikroTik address-list and firewall update
+immediately (look at <a href="#ticker_interval">TICKER_INTERVAL</a>).</p>
+<p>This makes ban added from other tools being applied faster, but for the
+price of creating new address-list and firewall update.
+Effectively you really want this enabled, and also have <a href="#use_max_ttl">USE_MAX_TTL</a>
+set to say 4h for quicker old address expiration.</p>
+<p>If set to <code>false</code> then the address will not be banned until the next loop
+of the <a href="#mikrotik_update_frequency">MIKROTIK_UPDATE_FREQUENCY</a> is executed,
+so on default settings it may take up to 1h before address is banned.</p>
+<h3 id="ticker_interval">TICKER_INTERVAL</h3>
+<p><code>TICKER_INTERVAL</code> - default value: <code>10s</code>, optional
+how frequently process streamed decisions from CrowdSec LAPI,</p>
+<p>Notice this is a golang <a href="https://pkg.go.dev/time#Duration">time.Duration</a>
+format, but the value cannot be equal or less than <code>0s</code>.</p>
+<p>This will vary depending on the current length of the IP addresses
+to be blocked - so for example if you test with 4k addresses inserted and it
+takes 10s then adding 20k addresses may take more (let say 25s).</p>
+<p>The best if this is the total time used to update MikroTik
+address lists and firewall plus about 30% just to prevent bouncer stuck waiting
+to acquire lock for the update.</p>
+<p>If you get frequent delays in acquiring lock then try to increase this value
+higher, certain devices are quite slow and they need at least <code>30s</code> or <code>60s</code>
+for processing.</p>
+<p>Sometimes it is just better to buy better faster hardware.</p>
+<h3 id="gomaxprocs">GOMAXPROCS</h3>
+<p><code>GOMAXPROCS</code> - default value: unset (automatic number of processors), optional,
+Set default processes to use by golang app, especially useful to prevent it
+from getting excessively throttled in the containers,
+Recommended value <code>1</code>.</p>
+<h3 id="metrics_address">METRICS_ADDRESS</h3>
+<p><code>METRICS_ADDRESS</code> - default value: <code>:2112</code>, optional,
+Address to use to start metrics server in Prometheus format, metrics are
+exposed under <code>/metrics</code> path, without authorization (not implemented).</p>
+<h3 id="tz">TZ</h3>
+<p><code>TZ</code> - default value: unset, optional,
+set desired timezone, otherwise if empty then it will take local time from
+the machine it runs on. It affects logging and name of the address-list
+suffix created on the MikroTik device. Example <code>UTC</code> or <code>Europe/Warsaw</code>.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-custom">2025-08-10 00:39:37 +0200 (UTC)</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../config.mikrotik/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Mikrotik config">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Mikrotik config
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../deploy/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploy">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Deploy
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>
